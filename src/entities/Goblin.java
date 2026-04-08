@@ -1,3 +1,5 @@
+package entities;
+
 public class Goblin extends Enemy {
     public Goblin(String name) {
 

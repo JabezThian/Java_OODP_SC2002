@@ -1,3 +1,5 @@
+package entities;
+
 public abstract class Player extends Combatant {
     protected int specialCooldown = 0;
     protected Action specialSkill;
