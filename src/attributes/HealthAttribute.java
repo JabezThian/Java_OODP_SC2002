@@ -1,3 +1,5 @@
+package attributes;
+
 public class HealthAttribute extends Attribute{
     private int maxhealth;
 

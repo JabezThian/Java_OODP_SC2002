@@ -1,3 +1,5 @@
+package attributes;
+
 public abstract class Attribute {
     protected int value;
 
