@@ -1,34 +1,17 @@
 package core;
 
-import entities.*;
-import actions.*;
-import ui.*;
-import java.util.ArrayList;
-import java.util.List;
+import difficulty.EasyLevel;
+import difficulty.HardLevel;
+import difficulty.Level;
+import difficulty.MediumLevel;
 
 public class LevelFactory {
-    public static List<Enemy> createLevel(int choice) {
-        List<Enemy> enemies = new ArrayList<>();
+    public static Level createLevel(int choice) {
         switch (choice) {
-            case 1: // Easy
-                System.out.println(">> Level: Easy (3 Goblins)");
-                enemies.add(new Goblin("Goblin A"));
-                enemies.add(new Goblin("Goblin B"));
-                enemies.add(new Goblin("Goblin C"));
-                break;
-            case 2: // Medium
-                System.out.println(">> Level: Medium (1 Goblin, 1 Wolf)");
-                enemies.add(new Goblin("Goblin A"));
-                enemies.add(new Wolf("Wolf A"));
-                break;
-            case 3: // Hard
-                System.out.println(">> Level: Hard (2 Goblins - Higher Stats)");
-                enemies.add(new Goblin("Goblin A"));
-                enemies.add(new Goblin("Goblin B"));
-                break;
-            default:
-                return null;
+            case 1: return new EasyLevel();
+            case 2: return new MediumLevel();
+            case 3: return new HardLevel();
+            default: return null;
         }
-        return enemies;
     }
 }

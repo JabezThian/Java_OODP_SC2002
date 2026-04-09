@@ -38,6 +38,10 @@ public abstract class Combatant {
         activeEffects.remove(effect);
     }
 
+    public List<StatusEffect> getActiveEffects() {
+        return activeEffects;
+    }
+
     public boolean isStunned() {
         return activeEffects.stream().anyMatch(e -> e instanceof Stun);
     }
