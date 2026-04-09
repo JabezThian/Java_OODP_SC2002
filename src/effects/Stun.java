@@ -1,10 +1,20 @@
 package effects;
 
 import entities.Combatant;
+import triggers.LocalTriggerTypes;
 
 public class Stun extends StatusEffect {
-    public Stun(int duration) {
-        super("Stunned", duration);
+
+    public Stun(Combatant affectedEntity, int duration) {
+        super(affectedEntity, duration);
+        this.setStatusName("Stun");
+        this.setPriority(1);
+        this.addLocalTriggerCondition(LocalTriggerTypes.ON_TURN_END);
+        this.applyStatus();
     }
-    // Combatant uses this to check when to skip a turn
+
+    public void onTurnStart() {
+        this.updateCurStatusDuration();
+    }
+
 }

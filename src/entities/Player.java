@@ -28,6 +28,10 @@ public abstract class Player extends Combatant {
         return specialCooldown;
     }
 
+    public void setSpecialCooldown(int value) {
+        this.specialCooldown = value;
+    }
+
     public String getSpecialSkillName() {
         return specialSkill.getName();
     }

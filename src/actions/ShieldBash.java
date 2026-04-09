@@ -13,7 +13,7 @@ public class ShieldBash implements Action {
         // Calculate and deal damage
         new DamageCalculator(performer, target).executeDamage();
         // Apply the Stun status (2 rounds: Current + Next)
-        target.addEffect(new Stun(2));
+        new Stun(target, 2);
     }
 
     @Override

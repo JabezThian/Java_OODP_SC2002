@@ -1,11 +1,7 @@
 package item;
 
-import combatant.Combatant;
-import combatant.Player;
-import combatant.Warrior;
-import combatant.Wizard;
-import action.ShieldBash;
-import action.ArcaneBlast;
+import entities.*;
+import actions.*;
 import java.util.List;
 
 public class PowerStone extends Item {

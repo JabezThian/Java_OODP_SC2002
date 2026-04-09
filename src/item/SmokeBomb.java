@@ -1,7 +1,7 @@
 package item;
 
-import combatant.Combatant;
-import status.SmokeBombInvulnerability;
+import entities.Combatant;
+import effects.SmokeBombInvulnerability;
 import java.util.List;
 
 public class SmokeBomb extends Item {

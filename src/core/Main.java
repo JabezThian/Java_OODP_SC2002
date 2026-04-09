@@ -2,6 +2,7 @@ package core;
 
 import entities.*;
 import actions.*;
+import triggers.*;
 import ui.*;
 import java.util.*;
 
@@ -10,6 +11,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         BattleDisplay display = new BattleDisplay();
         TurnOrderStrategy turnStrategy = new TurnOrderStrategy();
+        new GlobalTriggers();
 
         // NAME & CLASS SELECTION
         System.out.print("Enter your Hero's name: ");
@@ -61,12 +63,17 @@ public class Main {
             List<Combatant> participants = new ArrayList<>();
             participants.add(player);
             participants.addAll(enemies);
-            turnStrategy.sortBySpeed(participants);
 
+            // Effects update (start of round)
+            GlobalTriggers.getGlobalTriggerObject().trigger(GlobalTriggerTypes.ON_ROUND_START);
+
+            turnStrategy.sortBySpeed(participants);
             display.showTurnOrder(participants);
 
             for (Combatant c : participants) {
                 if (c.getHealth().isDead() || turnStrategy.isGameOver(player, enemies)) continue;
+                // Start of turn triggers
+                c.getLocalTriggerList().trigger(LocalTriggerTypes.ON_TURN_START);
 
                 if (c instanceof Player) {
                     handlePlayerTurn((Player) c, enemies, scanner, display);
@@ -79,15 +86,12 @@ public class Main {
                         new BasicAttack().execute(c, List.of(player));
                     }
                 }
+                // End of turn triggers
+                c.getLocalTriggerList().trigger(LocalTriggerTypes.ON_TURN_END);
             }
 
-            // EFFECTS UPDATE (End of Round)
-            player.updateEffects();
-            player.updateCooldown();
-            for (Enemy e : enemies) {
-                e.updateEffects();
-            }
-
+            // Effects update (End of Round)
+            GlobalTriggers.getGlobalTriggerObject().trigger(GlobalTriggerTypes.ON_ROUND_END);
             enemies.removeIf(e -> e.getHealth().isDead());
             roundCounter++;
         }

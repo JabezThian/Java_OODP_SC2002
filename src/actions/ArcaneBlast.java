@@ -1,7 +1,7 @@
 package actions;
 
 import entities.Combatant;
-import effects.AttackBuffEffect;
+import effects.ArcaneBlastStatus;
 import java.util.List;
 import core.DamageCalculator;
 
@@ -21,8 +21,7 @@ public class ArcaneBlast implements Action {
         }
 
         if (kills > 0) {
-            // Duration -1 means it never expires (until end of game)
-            performer.addEffect(new AttackBuffEffect(kills * 10, -1));
+            new ArcaneBlastStatus(performer, -1);
             System.out.println(performer.getName() + " absorbed souls! Attack + " + (kills * 10));
         }
     }

@@ -19,4 +19,8 @@ public class HealthAttribute extends Attribute{
     public boolean isDead() {
         return this.value <= 0;
     }
+
+    public int getMaxHealth() {
+        return this.maxhealth;
+    }
 }

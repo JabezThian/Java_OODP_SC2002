@@ -1,6 +1,6 @@
 package item;
 
-import combatant.Combatant;
+import entities.Combatant;
 import java.util.List;
 
 public abstract class Item {

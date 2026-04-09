@@ -1,6 +1,7 @@
 package core;
 
 import entities.Combatant;
+import triggers.LocalTriggerTypes;
 
 public class DamageCalculator {
     private final Combatant attacker;
@@ -15,6 +16,8 @@ public class DamageCalculator {
         int atk = attacker.getTotalAttack();
         int def = defender.getTotalDefense();
         int damage = Math.max(0, atk - def);
+        damage = attacker.getLocalTriggerList().trigger(LocalTriggerTypes.ON_OUTGOING_DAMAGE, damage);
+        damage = defender.getLocalTriggerList().trigger(LocalTriggerTypes.ON_INCOMING_DAMAGE, damage);
         defender.getHealth().takeDamage(damage);
         System.out.println(attacker.getName() + " deals " + damage + " damage to " + defender.getName());
         return damage;
