@@ -20,6 +20,7 @@ public class DamageCalculator {
         damage = defender.getLocalTriggerList().trigger(LocalTriggerTypes.ON_INCOMING_DAMAGE, damage);
         defender.getHealth().takeDamage(damage);
         System.out.println(attacker.getName() + " deals " + damage + " damage to " + defender.getName());
+        System.out.println(defender.getName() + " now has " + defender.getHealth().getValue() + " HP left.");
         return damage;
     }
 }
