@@ -16,5 +16,5 @@ public class Stun extends StatusEffect {
     public void onTurnStart() {
         this.updateCurStatusDuration();
     }
-
+    
 }

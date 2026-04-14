@@ -1,25 +1,12 @@
 package ui;
 
-import difficulty.EasyLevel;
-import difficulty.HardLevel;
-import difficulty.Level;
-import difficulty.MediumLevel;
-import entities.Player;
-import entities.Warrior;
-import entities.Wizard;
-import item.Item;
-import item.ItemBag;
-import item.Potion;
-import item.PowerStone;
-import item.SmokeBomb;
-
 import java.util.Scanner;
 
 public class LoadingScreen {
 
     public void showBanner() {
         System.out.println("╔══════════════════════════════════════════════╗");
-        System.out.println("║       TURN-BASED COMBAT ARENA  v1.0         ║");
+        System.out.println("║       TURN-BASED COMBAT ARENA  v1.0          ║");
         System.out.println("║              SC2002 Group Project            ║");
         System.out.println("╚══════════════════════════════════════════════╝");
         System.out.println();
@@ -69,105 +56,71 @@ public class LoadingScreen {
         System.out.println("═════════════════════════════════════════════════════");
     }
 
-    /**
-     * Shows all player and enemy info, prompts for name and class, returns the created Player.
-     */
-    public Player promptPlayerSetup(Scanner scanner) {
+    public String promptPlayerName(Scanner scanner) {
         showPlayerOptions();
         System.out.println();
         showEnemyInfo();
         System.out.println();
 
         System.out.print("Enter your hero's name: ");
-        // If a prior nextInt() left a newline in the buffer, consume it first.
         String name = scanner.nextLine();
         if (name.trim().isEmpty()) name = scanner.nextLine();
         name = name.trim();
         if (name.isEmpty()) name = "Hero";
+        return name;
+    }
 
-        Player player = null;
-        while (player == null) {
+    public int promptClassChoice(Scanner scanner) {
+        int choice = -1;
+        while (choice != 1 && choice != 2) {
             System.out.println("\nSelect your class:");
             System.out.println("  1. Warrior");
             System.out.println("  2. Wizard");
             System.out.print("Choice » ");
-            int choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    player = new Warrior(name);
-                    System.out.println(">> You chose Warrior!");
-                    break;
-                case 2:
-                    player = new Wizard(name);
-                    System.out.println(">> You chose Wizard!");
-                    break;
-                default:
-                    System.out.println(">> Invalid choice. Please select 1 or 2.");
+            try {
+                choice = scanner.nextInt();
+            } catch (java.util.InputMismatchException e) {
+                scanner.next();
+            }
+            if (choice != 1 && choice != 2) {
+                System.out.println(">> Invalid choice. Please select 1 or 2.");
             }
         }
-        return player;
+        return choice;
     }
 
-    /**
-     * Prompts for exactly 2 item picks (duplicates allowed), populates the given ItemBag.
-     */
-    public void promptItemSelection(Scanner scanner, ItemBag bag) {
-        showItemOptions();
-        System.out.println();
-
-        for (int pick = 1; pick <= 2; pick++) {
-            Item chosen = null;
-            while (chosen == null) {
-                System.out.printf("Pick item %d (1-3): ", pick);
-                int choice = scanner.nextInt();
-                switch (choice) {
-                    case 1:
-                        chosen = new Potion();
-                        break;
-                    case 2:
-                        chosen = new PowerStone();
-                        break;
-                    case 3:
-                        chosen = new SmokeBomb();
-                        break;
-                    default:
-                        System.out.println(">> Invalid choice. Please select 1, 2, or 3.");
-                }
+    public int promptItemChoice(Scanner scanner, int pickNumber) {
+        int choice = -1;
+        while (choice < 1 || choice > 3) {
+            System.out.printf("Pick item %d (1-3): ", pickNumber);
+            try {
+                choice = scanner.nextInt();
+            } catch (java.util.InputMismatchException e) {
+                scanner.next();
             }
-            bag.gainItem(chosen);
-            System.out.println(">> Added: " + chosen.getName());
+            if (choice < 1 || choice > 3) {
+                System.out.println(">> Invalid choice. Please select 1, 2, or 3.");
+            }
         }
-        System.out.println(">> Items selected:");
-        bag.displayItems();
+        return choice;
     }
 
-    /**
-     * Shows difficulty options and returns the chosen Level implementation.
-     */
-    public Level promptDifficultyChoice(Scanner scanner) {
+    public int promptDifficultyChoice(Scanner scanner) {
         showDifficultyOptions();
         System.out.println();
 
-        Level level = null;
-        while (level == null) {
+        int choice = -1;
+        while (choice < 1 || choice > 3) {
             System.out.print("Select difficulty (1-3): ");
-            int choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    level = new EasyLevel();
-                    break;
-                case 2:
-                    level = new MediumLevel();
-                    break;
-                case 3:
-                    level = new HardLevel();
-                    break;
-                default:
-                    System.out.println(">> Invalid choice. Please select 1, 2, or 3.");
+            try {
+                choice = scanner.nextInt();
+            } catch (java.util.InputMismatchException e) {
+                scanner.next();
+            }
+            if (choice < 1 || choice > 3) {
+                System.out.println(">> Invalid choice. Please select 1, 2, or 3.");
             }
         }
-        System.out.println(">> Difficulty: " + level.getDifficultyName()
-                + " | " + level.getInitialEnemyDescription());
-        return level;
+        return choice;
     }
 }

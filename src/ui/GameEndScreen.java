@@ -8,7 +8,7 @@ public class GameEndScreen {
     public void showVictory(Player player, int totalRounds) {
         System.out.println();
         System.out.println("╔══════════════════════════════════════════════╗");
-        System.out.println("║                  VICTORY!                   ║");
+        System.out.println("║                  VICTORY!                    ║");
         System.out.println("╚══════════════════════════════════════════════╝");
         System.out.println("Congratulations, you have defeated all your enemies.");
         System.out.println();
@@ -23,7 +23,7 @@ public class GameEndScreen {
     public void showDefeat(Player player, int enemiesRemaining, int totalRounds) {
         System.out.println();
         System.out.println("╔══════════════════════════════════════════════╗");
-        System.out.println("║                  DEFEATED                   ║");
+        System.out.println("║                  DEFEATED                    ║");
         System.out.println("╚══════════════════════════════════════════════╝");
         System.out.println("Defeated. Don't give up, try again!");
         System.out.println();
@@ -49,7 +49,11 @@ public class GameEndScreen {
         int choice = -1;
         while (choice < 1 || choice > 3) {
             System.out.print("Choice » ");
-            choice = scanner.nextInt();
+            try {
+                choice = scanner.nextInt();
+            } catch (java.util.InputMismatchException e) {
+                scanner.next();
+            }
             if (choice < 1 || choice > 3) {
                 System.out.println(">> Invalid choice. Please select 1, 2, or 3.");
             }
