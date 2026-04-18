@@ -21,9 +21,9 @@ public class BattleDisplay {
                 p.getName(),
                 p.getHealth().getValue(),
                 p.getHealth().getMaxHealth(),
-                p.getAttack().getValue(),
-                p.getDefense().getValue(),
-                p.getSpeed().getValue());
+                p.getTotalAttack(),
+                p.getTotalDefense(),
+                p.getTotalSpeed());
 
         // Cooldown info
         if (p.getSpecialCooldown() == 0) {
@@ -57,9 +57,9 @@ public class BattleDisplay {
                     e.getName(),
                     e.getHealth().getValue(),
                     e.getHealth().getMaxHealth(),
-                    e.getAttack().getValue(),
-                    e.getDefense().getValue(),
-                    e.getSpeed().getValue(),
+                    e.getTotalAttack(),
+                    e.getTotalDefense(),
+                    e.getTotalSpeed(),
                     stunTag);
         }
     }

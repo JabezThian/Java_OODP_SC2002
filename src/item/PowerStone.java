@@ -35,15 +35,8 @@ public class PowerStone extends Item {
         int savedCooldown = player.getSpecialCooldown();
         
         System.out.printf(">> %s used Power Stone! Triggering special skill for free!%n", user.getName());
-        
-        if (player instanceof Warrior) {
-            if (targets != null && !targets.isEmpty()) {
-                new ShieldBash().execute(player, targets);
-            }
-        } 
-        else if (player instanceof Wizard) {
-            new ArcaneBlast().execute(player, targets);
-        }
+
+        if (targets != null && !targets.isEmpty()) player.useSpecial(targets);
         
         player.setSpecialCooldown(savedCooldown);
         itemQuantity--;
