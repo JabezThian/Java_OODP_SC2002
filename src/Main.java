@@ -1,6 +1,5 @@
-package core;
-
 import java.util.Scanner;
+import core.BattleEngine;
 
 public class Main {
     public static void main(String[] args) {
