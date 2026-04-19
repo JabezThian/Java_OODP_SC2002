@@ -33,6 +33,8 @@ public class PowerStone extends Item {
         
         Player player = (Player) user;
         int savedCooldown = player.getSpecialCooldown();
+
+        player.setSpecialCooldown(0);
         
         System.out.printf(">> %s used Power Stone! Triggering special skill for free!%n", user.getName());
 
